@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Errors, Exceptions, Functions & Strings</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        .section-title {
+            color: #2563eb;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .code-block {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background-color: #1e1e3f;
+            color: #c7d4e2;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            overflow-x: auto;
+            position: relative;
+        }
+        .code-title {
+            background-color: #2d2b57;
+            padding: 5px 15px;
+            border-radius: 6px 6px 0 0;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .py-keyword {
+            color: #ff7edb;
+        }
+        .py-string {
+            color: #a5ff90;
+        }
+        .py-comment {
+            color: #7970a9;
+            font-style: italic;
+        }
+        .py-function {
+            color: #82aaff;
+        }
+        .py-number {
+            color: #ff9d00;
+        }
+        .note-box {
+            background-color: #e6f7ff;
+            border-left: 4px solid #1890ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .warning-box {
+            background-color: #fff7e6;
+            border-left: 4px solid #fa8c16;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .tip-box {
+            background-color: #f6ffed;
+            border-left: 4px solid #52c41a;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .concept-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            background-color: white;
+        }
+        .concept-card-header {
+            background-color: #e2e8f0;
+            padding: 10px 15px;
+            border-radius: 8px 8px 0 0;
+            font-weight: bold;
+        }
+        .concept-card-body {
+            padding: 15px;
+        }
+        .code-result {
+            background-color: #f1f5f9;
+            padding: 10px 15px;
+            border-left: 3px solid #3b82f6;
+            margin: 10px 0;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+        .key-point {
+            background-color: #fef3c7;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold">Chapter-II</h1>
+            <p class="text-xl mt-2">Errors, Exceptions, Functions & Strings</p>
+            <p class="mt-2">II BCA, Dept. of Computer Science, KFGSC, Tiptur</p>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Table of Contents</h2>
+            <ul class="space-y-2">
+                <li><a href="#errors-exceptions" class="text-blue-600 hover:underline flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-2"></i> Errors and Exceptions
+                </a></li>
+                <li><a href="#functions" class="text-blue-600 hover:underline flex items-center">
+                    <i class="fas fa-code mr-2"></i> Functions in Python
+                </a></li>
+                <li><a href="#strings" class="text-blue-600 hover:underline flex items-center">
+                    <i class="fas fa-quote-right mr-2"></i> Strings
+                </a></li>
+            </ul>
+        </div>
+
+        <!-- ERRORS AND EXCEPTIONS SECTION -->
+        <section id="errors-exceptions" class="section">
+            <h2 class="text-3xl font-bold section-title">
+                <i class="fas fa-exclamation-triangle mr-2"></i> Errors and Exceptions
+            </h2>
+            
+            <div class="mb-8">
+                <p class="mb-4">
+                    <strong class="text-lg text-blue-700">What's the difference?</strong> 
+                    <span class="bg-yellow-100 px-1 rounded">Errors</span> are problems that cause a program to stop execution, 
+                    while <span class="bg-yellow-100 px-1 rounded">Exceptions</span> are raised when internal events change the normal flow of a program.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                        <h3 class="text-xl font-semibold text-red-700 mb-2">
+                            <i class="fas fa-times-circle mr-2"></i>Syntax Errors
+                        </h3>
+                        <p>Occur when the proper syntax of Python is not followed. They prevent the program from running.</p>
+                    </div>
+                    
+                    <div class="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-500">
+                        <h3 class="text-xl font-semibold text-orange-700 mb-2">
+                            <i class="fas fa-exclamation-circle mr-2"></i>Logical Errors (Exceptions)
+                        </h3>
+                        <p>Occur during runtime after passing the syntax test. They disrupt normal program flow.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700 mb-4">Syntax Error Example</h3>
+            
+            <div class="code-block">
+                <div class="code-title">Syntax Error Example</div>
+                <pre><span class="py-comment"># initialize the amount variable</span>
+<span class="py-keyword">amount</span> = <span class="py-number">10000</span>
+
+<span class="py-comment"># check that You are eligible to</span>
+<span class="py-comment"># purchase Dsa Self Paced or not</span>
+<span class="py-keyword">if</span>(amount>2999)  <span class="py-comment"># Missing colon (:)</span>
+    <span class="py-function">print</span>(<span class="py-string">"You are eligible to purchase Dsa Self Paced"</span>)</pre>
+            </div>
+            
+            <div class="warning-box">
+                <p><strong>Error:</strong> The code above would result in a syntax error because the <code>if</code> statement is missing a colon <code>:</code> at the end.</p>
+                <p><strong>Correct syntax:</strong> <code>if(amount>2999):</code></p>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 mt-8">Logical Error (Exception) Example</h3>
+            
+            <div class="code-block">
+                <div class="code-title">Logical Error Example</div>
+                <pre><span class="py-comment"># initialize the variable</span>
+<span class="py-keyword">marks</span> = <span class="py-number">10000</span>
+
+<span class="py-comment"># perform division with 0</span>
+<span class="py-keyword">a</span> = marks / <span class="py-number">0</span>  <span class="py-comment"># This will raise ZeroDivisionError</span>
+
+<span class="py-function">print</span>(a)</pre>
+            </div>
+            
+            <div class="warning-box">
+                <p><strong>Error:</strong> The code above would result in a <code>ZeroDivisionError</code> because division by zero is not allowed.</p>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 mt-8">Exception Handling in Python</h3>
+            
+            <div class="concept-card">
+                <div class="concept-card-header bg-blue-100">Try and Except Block</div>
+                <div class="concept-card-body">
+                    <p>The code that might generate an exception is placed inside the <code>try</code> block, and the code to handle the exception is written in the <code>except</code> block.</p>
+                    
+                    <div class="code-block mt-4">
+                        <pre><span class="py-keyword">try</span>:
+    <span class="py-comment"># code that may cause exception</span>
+    numerator = <span class="py-number">10</span>
+    denominator = <span class="py-number">0</span>
+    result = numerator/denominator
+    <span class="py-function">print</span>(result)
+<span class="py-keyword">except</span>:
+    <span class="py-function">print</span>(<span class="py-string">"Error: Denominator cannot be 0."</span>)
+<span class="py-keyword">finally</span>:
+    <span class="py-function">print</span>(<span class="py-string">"This is finally block."</span>)</pre>
+                    </div>
+                    
+                    <div class="code-result">
+                        <strong>Output:</strong><br>
+                        Error: Denominator cannot be 0.<br>
+                        This is finally block.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                <div class="tip-box">
+                    <h4 class="font-bold">try block</h4>
+                    <p>The code that might cause an exception is placed here.</p>
+                </div>
+                
+                <div class="tip-box">
+                    <h4 class="font-bold">except block</h4>
+                    <p>Executes when an exception occurs in the try block.</p>
+                </div>
+                
+                <div class="tip-box">
+                    <h4 class="font-bold">finally block</h4>
+                    <p>Always executes, regardless of whether an exception occurred.</p>
+                </div>
+            </div>
+            
+            <div class="note-box mt-6">
+                <p><strong>Optional blocks:</strong></p>
+                <ul class="list-disc pl-5">
+                    <li><strong>else block:</strong> Runs if the code in the try block executes without exceptions.</li>
+                    <li><strong>finally block:</strong> Always executes, regardless of whether an exception occurred.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- FUNCTIONS SECTION -->
+        <section id="functions" class="section">
+            <h2 class="text-3xl font-bold section-title">
+                <i class="fas fa-code mr-2"></i> Functions in Python
+            </h2>
+            
+            <p class="mb-4">A function is a reusable block of code that performs a specific task. Functions help in breaking our program into smaller and modular chunks, making it more organized and manageable.</p>
+            
+            <div class="key-point">
+                <h3 class="font-bold text-lg">Types of Functions in Python</h3>
+                <ul class="list-disc pl-6 mt-2">
+                    <li><strong>Standard library functions</strong> - Built-in functions in Python.</li>
+                    <li><strong>User-defined functions</strong> - Custom functions created based on specific requirements.</li>
+                </ul>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 mt-8">Function Declaration</h3>
+            
+            <div class="code-block">
+                <div class="code-title">Function Syntax</div>
+                <pre><span class="py-keyword">def</span> <span class="py-function">function_name</span>(arguments):
+    <span class="py-comment"># function body</span>
+    <span class="py-comment"># statements...</span>
+    <span class="py-keyword">return</span> value  <span class="py-comment"># optional</span></pre>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div>
+                    <h4 class="text-xl font-bold text-gray-700 mb-2">Simple Function Example</h4>
+                    <div class="code-block">
+                        <pre><span class="py-keyword">def</span> <span class="py-function">greet</span>():
+    <span class="py-function">print</span>(<span class="py-string">"Hello!"</span>)
+
+<span class="py-comment"># Calling the function</span>
+greet()</pre>
+                    </div>
+                    <div class="code-result">
+                        <strong>Output:</strong><br>
+                        Hello!
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold text-gray-700 mb-2">Function with Arguments</h4>
+                    <div class="code-block">
+                        <pre><span class="py-comment"># function with two arguments</span>
+<span class="py-keyword">def</span> <span class="py-function">add_numbers</span>(num1, num2):
+    sum = num1 + num2
+    <span class="py-function">print</span>(<span class="py-string">"Sum: "</span>, sum)
+
+<span class="py-comment"># function call with two values</span>
+add_numbers(<span class="py-number">5</span>, <span class="py-number">4</span>)</pre>
+                    </div>
+                    <div class="code-result">
+                        <strong>Output:</strong><br>
+                        Sum: 9
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 mt-8">Return Statement</h3>
+            
+            <p class="mb-4">The <code>return</code> statement sends a value back to the function caller. It's optional - if not included, the function returns <code>None</code>.</p>
+            
+            <div class="code-block">
+                <pre><span class="py-comment"># function definition with return value</span>
+<span class="py-keyword">def</span> <span class="py-function">find_square</span>(num):
+    result = num * num
+    <span class="py-keyword">return</span> result
+
+<span class="py-comment"># function call</span>
+square = find_square(<span class="py-number">3</span>)
+<span class="py-function">print</span>(<span class="py-string">'Square:'</span>, square)</pre>
+            </div>
+            
+            <div class="code-result">
+                <strong>Output:</strong><br>
+                Square: 9
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 mt-8">Default Arguments</h3>
+            
+            <p class="mb-4">Python allows us to specify default values for function arguments. These values are used when the corresponding argument is omitted.</p>
+            
+            <div class="code-block">
+                <pre><span class="py-keyword">def</span> <span class="py-function">add_numbers</span>(a = <span class="py-number">7</span>, b = <span class="py-number">8</span>):
+    sum = a + b
+    <span class="py-function">print</span>(<span class="py-string">'Sum:'</span>, sum)
+
+<span class="py-comment"># function call with two arguments</span>
+add_numbers(<span class="py-number">2</span>, <span class="py-number">3</span>)
+
+<span class="py-comment"># function call with one argument</span>
+add_numbers(a = <span class="py-number">2</span>)
+
+<span class="py-comment"># function call with no arguments</span>
+add_numbers()</pre>
+            </div>
+            
+            <div class="code-result">
+                <strong>Output:</strong><br>
+                Sum: 5<br>
+                Sum: 10<br>
+                Sum: 15
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 mt-8">Variable Length Arguments</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div>
+                    <h4 class="text-xl font-bold text-gray-700 mb-2">*args (Non-Keyword Arguments)</h4>
+                    <p class="mb-2">Allows you to pass a variable number of non-keyword arguments to a function.</p>
+                    <div class="code-block">
+                        <pre><span class="py-keyword">def</span> <span class="py-function">adder</span>(*num):
+    sum = <span class="py-number">0</span>
+    <span class="py-keyword">for</span> n <span class="py-keyword">in</span> num:
+        sum = sum + n
+    <span class="py-function">print</span>(<span class="py-string">"Sum:"</span>, sum)
+
+adder(<span class="py-number">3</span>, <span class="py-number">5</span>)
+adder(<span class="py-number">4</span>, <span class="py-number">5</span>, <span class="py-number">6</span>, <span class="py-number">7</span>)
+adder(<span class="py-number">1</span>, <span class="py-number">2</span>, <span class="py-number">3</span>, <span class="py-number">5</span>, <span class="py-number">6</span>)</pre>
+                    </div>
+                    <div class="code-result">
+                        <strong>Output:</strong><br>
+                        Sum: 8<br>
+                        Sum: 22<br>
+                        Sum: 17
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold text-gray-700 mb-2">**kwargs (Keyword Arguments)</h4>
+                    <p class="mb-2">Allows you to pass a variable number of keyword arguments to a function.</p>
+                    <div class="code-block">
+                        <pre><span class="py-keyword">def</span> <span class="py-function">intro</span>(**data):
+    <span class="py-function">print</span>(<span class="py-string">"\nData type of argument:"</span>, <span class="py-function">type</span>(data))
+    <span class="py-keyword">for</span> key, value <span class="py-keyword">in</span> data.items():
+        <span class="py-function">print</span>(<span class="py-string">"{} is {}"</span>.format(key, value))
+
+intro(Firstname=<span class="py-string">"Sita"</span>, Lastname=<span class="py-string">"Sharma"</span>, 
+      Age=<span class="py-number">22</span>, Phone=<span class="py-number">1234567890</span>)</pre>
+                    </div>
+                    <div class="code-result">
+                        <strong>Output:</strong><br>
+                        Data type of argument: &lt;class 'dict'&gt;<br>
+                        Firstname is Sita<br>
+                        Lastname is Sharma<br>
+                        Age is 22<br>
+                        Phone is 1234567890
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 mt-8">Recursive Functions</h3>
+            
+            <p class="mb-4">A recursive function is a function that calls itself during its execution. This approach can solve complex problems by breaking them down into simpler ones.</p>
+            
+            <div class="code-block">
+                <pre><span class="py-keyword">def</span> <span class="py-function">factorial</span>(x):
+    <span class="py-string">"""This is a recursive function
+    to find the factorial of an integer"""</span>
+    <span class="py-keyword">if</span> x == <span class="py-number">1</span>:
+        <span class="py-keyword">return</span> <span class="py-number">1</span>
+    <span class="py-keyword">else</span>:
+        <span class="py-keyword">return</span> (x * factorial(x-<span class="py-number">1</span>))
+
+num = <span class="py-number">3</span>
+<span class="py-function">print</span>(<span class="py-string">"The factorial of"</span>, num, <span class="py-string">"is"</span>, factorial(num))</pre>
+            </div>
+            
+            <div class="code-result">
+                <strong>Output:</strong><br>
+                The factorial of 3 is 6
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 mt-8">Variable Scope</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                    <h4 class="font-bold">Local Variables</h4>
+                    <p>Defined inside a function and can only be accessed within that function.</p>
+                </div>
+                
+                <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                    <h4 class="font-bold">Global Variables</h4>
+                    <p>Defined outside a function and can be accessed both inside and outside functions.</p>
+                </div>
+                
+                <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                    <h4 class="font-bold">Nonlocal Variables</h4>
+                    <p>Used in nested functions to refer to variables in the parent function's scope.</p>
+                </div>
+            </div>
+            
+            <div class="code-block mt-6">
+                <div class="code-title">Example of Variable Scopes</div>
+                <pre><span class="py-comment"># Global variable</span>
+message = <span class="py-string">'Hello'</span>
+
+<span class="py-keyword">def</span> <span class="py-function">outer</span>():
+    <span class="py-comment"># Local variable for outer()</span>
+    message = <span class="py-string">'local'</span>
+    
+    <span class="py-comment"># Nested function</span>
+    <span class="py-keyword">def</span> <span class="py-function">inner</span>():
+        <span class="py-comment"># Declare nonlocal variable</span>
+        <span class="py-keyword">nonlocal</span> message
+        message = <span class="py-string">'nonlocal'</span>
+        <span class="py-function">print</span>(<span class="py-string">"inner:"</span>, message)
+    
+    inner()
+    <span class="py-function">print</span>(<span class="py-string">"outer:"</span>, message)
+
+outer()
+<span class="py-function">print</span>(<span class="py-string">"Global:"</span>, message)</pre>
+            </div>
+            
+            <div class="code-result">
+                <strong>Output:</strong><br>
+                inner: nonlocal<br>
+                outer: nonlocal<br>
+                Global: Hello
+            </div>
+        </section>
+
+        <!-- STRINGS SECTION -->
+        <section id="strings" class="section">
+            <h2 class="text-3xl font-bold section-title">
+                <i class="fas fa-quote-right mr-2"></i> Strings in Python
+            </h2>
+            
+            <p class="mb-4">A string is a sequence of characters. In Python, strings are immutable, meaning they cannot be changed after creation.</p>
+            
+            <h3 class="text-2xl font-bold text-gray-700 mb-4">Creating Strings</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div>
+                    <h4 class="text-xl font-bold text-gray-700 mb-2">Using Single or Double Quotes</h4>
+                    <div class="code-block">
+                        <pre><span class="py-comment"># create strings</span>
+name = <span class="py-string">"Python"</span>
+<span class="py-function">print</span>(name)
+
+message = <span class="py-string">'I love Python.'</span>
+<span class="py-function">print</span>(message)</pre>
+                    </div>
+                    <div class="code-result">
+                        <strong>Output:</strong><br>
+                        Python<br>
+                        I love Python.
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold text-gray-700 mb-2">Multi-line Strings (Triple Quotes)</h4>
+                    <div class="code-block">
+                        <pre>message = <span class="py-string">"""
+Never gonna give you up
+Never gonna let you down
+"""</span>
+
+<span class="py-function">print</span>(message)</pre>
+                    </div>
+                    <div class="code-result">
+                        <strong>Output:</strong><br>
+                        Never gonna give you up<br>
+                        Never gonna let you down
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 mt-8">Accessing String Characters</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                <div class="concept-card">
+                    <div class="concept-card-header">Indexing</div>
+                    <div class="concept-card-body">
+                        <p>Access characters using index values, starting from 0.</p>
+                        <div class="code-block mt-2">
+                            <pre>greet = <span class="py-string">'hello'</span>
+<span class="py-comment"># access 1st index element</span>
+<span class="py-function">print</span>(greet[<span class="py-number">1</span>])</pre>
+                        </div>
+                        <div class="code-result">
+                            <strong>Output:</strong> e
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-card-header">Negative Indexing</div>
+                    <div class="concept-card-body">
+                        <p>Access characters from the end, starting with -1.</p>
+                        <div class="code-block mt-2">
+                            <pre>greet = <span class="py-string">'hello'</span>
+<span class="py-comment"># Access 4th last element</span>
+<span class="py-function">print</span>(greet[-<span class="py-number">4</span>])</pre>
+                        </div>
+                        <div class="code-result">
+                            <strong>Output:</strong> e
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-card-header">Slicing</div>
+                    <div class="concept-card-body">
+                        <p>Access a range of characters using the colon operator.</p>
+                        <div class="code-block mt-2">
+                            <pre>greet = <span class="py-string">'Hello'</span>
+<span class="py-comment"># From 1st to 3rd index</span>
+<span class="py-function">print</span>(greet[<span class="py-number">1</span>:<span class="py-number">4</span>])</pre>
+                        </div>
+                        <div class="code-result">
+                            <strong>Output:</strong> ell
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 mt-8">String Operations</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div>
+                    <h4 class="text-xl font-bold text-gray-700 mb-2">String Comparison</h4>
+                    <div class="code-block">
+                        <pre>str1 = <span class="py-string">"Hello, world!"</span>
+str2 = <span class="py-string">"I love Python."</span>
+str3 = <span class="py-string">"Hello, world!"</span>
+
+<span class="py-comment"># compare str1 and str2</span>
+<span class="py-function">print</span>(str1 == str2)
+
+<span class="py-comment"># compare str1 and str3</span>
+<span class="py-function">print</span>(str1 == str3)</pre>
+                    </div>
+                    <div class="code-result">
+                        <strong>Output:</strong><br>
+                        False<br>
+                        True
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold text-gray-700 mb-2">String Concatenation</h4>
+                    <div class="code-block">
+                        <pre>greet = <span class="py-string">"Hello, "</span>
+name = <span class="py-string">"Jack"</span>
+
+<span class="py-comment"># using + operator</span>
+result = greet + name
+<span class="py-function">print</span>(result)</pre>
+                    </div>
+                    <div class="code-result">
+                        <strong>Output:</strong><br>
+                        Hello, Jack
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div>
+                    <h4 class="text-xl font-bold text-gray-700 mb-2">String Iteration</h4>
+                    <div class="code-block">
+                        <pre>greet = <span class="py-string">'Hello'</span>
+
+<span class="py-comment"># iterating through string</span>
+<span class="py-keyword">for</span> letter <span class="py-keyword">in</span> greet:
+    <span class="py-function">print</span>(letter)</pre>
+                    </div>
+                    <div class="code-result">
+                        <strong>Output:</strong><br>
+                        H<br>e<br>l<br>l<br>o
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold text-gray-700 mb-2">String Length</h4>
+                    <div class="code-block">
+                        <pre>greet = <span class="py-string">'Hello'</span>
+
+<span class="py-comment"># count length of string</span>
+<span class="py-function">print</span>(<span class="py-function">len</span>(greet))</pre>
+                    </div>
+                    <div class="code-result">
+                        <strong>Output:</strong><br>
+                        5
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 mt-8">Escape Sequences</h3>
+            
+            <p class="mb-4">Escape sequences allow you to include special characters in strings.</p>
+            
+            <div class="code-block">
+                <pre><span class="py-comment"># escape double quotes</span>
+example = <span class="py-string">"He said, \"What's there?\""</span>
+
+<span class="py-comment"># escape single quotes</span>
+example = <span class="py-string">'He said, "What\'s there?"'</span>
+
+<span class="py-function">print</span>(example)</pre>
+            </div>
+            
+            <div class="code-result">
+                <strong>Output:</strong><br>
+                He said, "What's there?"
+            </div>
+            
+            <div class="overflow-x-auto mt-6">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Escape Sequence</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>\\</td><td>Backslash</td></tr>
+                        <tr><td>\'</td><td>Single quote</td></tr>
+                        <tr><td>\"</td><td>Double quote</td></tr>
+                        <tr><td>\a</td><td>ASCII Bell</td></tr>
+                        <tr><td>\b</td><td>ASCII Backspace</td></tr>
+                        <tr><td>\f</td><td>ASCII Formfeed</td></tr>
+                        <tr><td>\n</td><td>ASCII Linefeed</td></tr>
+                        <tr><td>\r</td><td>ASCII Carriage Return</td></tr>
+                        <tr><td>\t</td><td>ASCII Horizontal Tab</td></tr>
+                        <tr><td>\v</td><td>ASCII Vertical Tab</td></tr>
+                        <tr><td>\ooo</td><td>Character with octal value ooo</td></tr>
+                        <tr><td>\xHH</td><td>Character with hexadecimal value HH</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 mt-8">String Formatting</h3>
+            
+            <div class="code-block">
+                <div class="code-title">f-String Example (Python 3.6+)</div>
+                <pre>name = <span class="py-string">'Cathy'</span>
+country = <span class="py-string">'UK'</span>
+<span class="py-function">print</span>(<span class="py-string">f'{name} is from {country}'</span>)</pre>
+            </div>
+            
+            <div class="code-result">
+                <strong>Output:</strong><br>
+                Cathy is from UK
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 mt-8">Raw Strings and Unicode</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div>
+                    <h4 class="text-xl font-bold text-gray-700 mb-2">Raw Strings</h4>
+                    <p>Raw strings ignore escape sequences by prefixing the string with 'r'.</p>
+                    <div class="code-block">
+                        <pre><span class="py-comment"># Define raw string</span>
+s1 = <span class="py-string">r'Python\nis\easy\to\learn'</span>
+<span class="py-function">print</span>(s1)</pre>
+                    </div>
+                    <div class="code-result">
+                        <strong>Output:</strong><br>
+                        Python\nis\easy\to\learn
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold text-gray-700 mb-2">Unicode</h4>
+                    <p>Unicode supports characters from all languages and symbols.</p>
+                    <div class="code-block">
+                        <pre><span class="py-keyword">from</span> __future__ <span class="py-keyword">import</span> unicode_literals
+
+<span class="py-comment"># Unicode characters</span>
+p = <span class="py-string">"\u2119"</span>  <span class="py-comment"># ℙ</span>
+y = <span class="py-string">"\u01b4"</span>  <span class="py-comment"># ƴ</span>
+t = <span class="py-string">"\u2602"</span>  <span class="py-comment"># ☂</span>
+h = <span class="py-string">"\u210c"</span>  <span class="py-comment"># ℌ</span>
+o = <span class="py-string">"\u00f8"</span>  <span class="py-comment"># ø</span>
+n = <span class="py-string">"\u1f24"</span>  <span class="py-comment"># ἤ</span>
+
+<span class="py-function">print</span>(p+y+t+h+o+n)</pre>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-700 mb-4 mt-8">Common String Methods</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div>
+                    <h4 class="text-xl font-bold text-gray-700 mb-2">Case Conversion</h4>
+                    <div class="code-block">
+                        <pre>text = <span class="py-string">"Python Programming"</span>
+
+<span class="py-comment"># Convert to lowercase</span>
+<span class="py-function">print</span>(text.lower())
+
+<span class="py-comment"># Convert to uppercase</span>
+<span class="py-function">print</span>(text.upper())
+
+<span class="py-comment"># Convert to title case</span>
+<span class="py-function">print</span>(text.title())
+
+<span class="py-comment"># Swap case</span>
+<span class="py-function">print</span>(text.swapcase())</pre>
+                    </div>
+                    <div class="code-result">
+                        <strong>Output:</strong><br>
+                        python programming<br>
+                        PYTHON PROGRAMMING<br>
+                        Python Programming<br>
+                        pYTHON pROGRAMMING
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold text-gray-700 mb-2">Search and Replace</h4>
+                    <div class="code-block">
+                        <pre>text = <span class="py-string">"Python is amazing"</span>
+
+<span class="py-comment"># Find index of 'is'</span>
+<span class="py-function">print</span>(text.find(<span class="py-string">"is"</span>))
+
+<span class="py-comment"># Replace 'amazing' with 'awesome'</span>
+<span class="py-function">print</span>(text.replace(<span class="py-string">"amazing"</span>, <span class="py-string">"awesome"</span>))</pre>
+                    </div>
+                    <div class="code-result">
+                        <strong>Output:</strong><br>
+                        7<br>
+                        Python is awesome
+                    </div>
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto mt-8">
+                <h4 class="text-xl font-bold text-gray-700 mb-2">String Method Reference Table</h4>
+                <div class="note-box">
+                    <p>Python provides many built-in methods to work with strings. Here's a selection of the most commonly used ones:</p>
+                </div>
+                <table class="mt-4">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>capitalize()</td>
+                            <td>Converts first character to uppercase</td>
+                        </tr>
+                        <tr>
+                            <td>center(width)</td>
+                            <td>Returns a centered string</td>
+                        </tr>
+                        <tr>
+                            <td>count(substring)</td>
+                            <td>Returns the number of occurrences of a substring</td>
+                        </tr>
+                        <tr>
+                            <td>endswith(suffix)</td>
+                            <td>Returns True if the string ends with the specified suffix</td>
+                        </tr>
+                        <tr>
+                            <td>find(substring)</td>
+                            <td>Returns the lowest index of the substring if found</td>
+                        </tr>
+                        <tr>
+                            <td>format()</td>
+                            <td>Formats specified values in a string</td>
+                        </tr>
+                        <tr>
+                            <td>isalnum()</td>
+                            <td>Returns True if all characters are alphanumeric</td>
+                        </tr>
+                        <tr>
+                            <td>isalpha()</td>
+                            <td>Returns True if all characters are alphabetic</td>
+                        </tr>
+                        <tr>
+                            <td>isdigit()</td>
+                            <td>Returns True if all characters are digits</td>
+                        </tr>
+                        <tr>
+                            <td>join(iterable)</td>
+                            <td>Joins elements of an iterable with a string separator</td>
+                        </tr>
+                        <tr>
+                            <td>lower()</td>
+                            <td>Converts a string to lowercase</td>
+                        </tr>
+                        <tr>
+                            <td>replace(old, new)</td>
+                            <td>Returns a string with replaced values</td>
+                        </tr>
+                        <tr>
+                            <td>split(separator)</td>
+                            <td>Splits the string at the specified separator</td>
+                        </tr>
+                        <tr>
+                            <td>strip()</td>
+                            <td>Returns a trimmed version of the string</td>
+                        </tr>
+                        <tr>
+                            <td>upper()</td>
+                            <td>Converts a string to uppercase</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>
